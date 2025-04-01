@@ -1,9 +1,12 @@
 :root {
-  --primary-color: #4caf50;
-  --secondary-color: #8bc34a;
-  --accent-color: #fff9c4;
-  --text-color: #33691e;
-  --selected-color: #ffd700;
+  --primary-color: #8b4513;
+  --secondary-color: #deb887;
+  --accent-color: #f4a460;
+  --text-color: #5d4037;
+  --background-color: #fff8dc;
+  --number-available: #4caf50;
+  --number-selected: #ffa500;
+  --number-unavailable: #8b4513;
 }
 
 * {
@@ -12,47 +15,60 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Comic Neue", cursive;
-  background-color: #f1f8e9;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
-.safari-container {
+/* Convite Section */
+.convite {
+  min-height: 100vh;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 100vh;
-  padding: 2rem;
-  position: relative;
+  justify-content: center;
 }
 
-.animal-left,
-.animal-right {
-  flex: 1;
-  height: 100%;
-}
-
-.safari-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.background-image {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  background-image: url("../assets/img/background01.png");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  animation: zoomBackground 20s infinite alternate;
 }
 
 .content-center {
-  flex: 1;
   text-align: center;
-  z-index: 2;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 2rem;
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 1s ease-out;
+}
+
+/* Typography */
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 h1,
-h2,
-h3 {
+h2 {
   font-family: "Bubblegum Sans", cursive;
   color: var(--primary-color);
+  margin-bottom: 1rem;
+  animation: swing 2s ease-in-out infinite;
 }
 
 h1 {
@@ -60,115 +76,303 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
-}
-
-h3 {
-  font-size: 2rem;
+  font-size: 2.8rem;
+  color: var(--accent-color);
 }
 
 .data {
   font-size: 1.5rem;
   margin: 1.5rem 0;
+  color: var(--text-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.countdown-item {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  min-width: 100px;
+  text-align: center;
+  animation: bounceIn 1s ease-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-item span:first-child {
+  font-size: 2rem;
+  font-weight: bold;
+  display: block;
+}
+
+/* Destaque e CTA */
 .destaque {
+  background-color: var(--secondary-color);
+  padding: 1.5rem 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  animation: pulse 2s infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
   font-size: 1.2rem;
   margin-top: 1rem;
+  transition: transform 0.3s;
+  animation: shake 3s infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.cta-button:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-color);
+}
+
+/* Rifa Section */
 .rifa-section {
-  padding: 4rem 1rem;
-  background-color: white;
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .section-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }
 
-.rifa-info {
-  margin: 1rem 0;
-  font-size: 1.2rem;
-  color: var(--text-color);
+.fraldas-info {
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  color: white;
+  animation: fadeInUp 0.5s ease-out;
 }
 
 .rifa-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
   margin: 2rem auto;
-  max-width: 600px;
+  max-width: 900px;
 }
 
 .number-box {
   aspect-ratio: 1;
-  border: 2px solid var(--primary-color);
-  border-radius: 10px;
+  background-color: var(--number-available);
+  color: white;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: white;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .number-box:hover {
-  transform: scale(1.05);
-  background-color: var(--accent-color);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .number-box.selected {
-  background-color: var(--selected-color);
-  border-color: var(--primary-color);
+  background-color: var(--number-selected);
+  animation: selectedPulse 1s infinite;
 }
 
-.selected-numbers {
-  margin: 2rem 0;
-  font-size: 1.2rem;
+.number-box.unavailable {
+  background-color: var(--number-unavailable);
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
+/* WhatsApp Button */
 .whatsapp-btn {
   background-color: #25d366;
   color: white;
   border: none;
   padding: 1rem 2rem;
-  border-radius: 10px;
+  border-radius: 50px;
   font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 2rem;
+  animation: pulse 2s infinite;
 }
 
 .whatsapp-btn:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+  animation: none;
 }
 
 .whatsapp-btn:hover:not(:disabled) {
   transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 768px) {
-  .safari-container {
-    flex-direction: column;
-    min-height: auto;
-  }
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--primary-color);
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
 
-  .content-center {
-    margin: 2rem 0;
-  }
+.back-to-top.visible {
+  opacity: 1;
+}
 
-  h1 {
-    font-size: 2.5rem;
-  }
+/* footer styles */
+footer {
+  background-color: rgba(139, 69, 19, 0.9);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  border-top: 3px solid var(--accent-color);
+  animation: fadeInUp 1s ease-out;
+}
 
-  h2 {
-    font-size: 2rem;
-  }
+footer p {
+  font-family: "Bubblegum Sans", cursive;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
 
-  .rifa-grid {
-    grid-template-columns: repeat(4, 1fr);
+footer .emoji {
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  animation: swing 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Animations */
+@keyframes zoomBackground {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes selectedPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 165, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 165, 0, 0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  85% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-4px);
+  }
+  95% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
