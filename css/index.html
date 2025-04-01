@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Chá Rifa do Bento" />
+    <meta
+      name="keywords"
+      content="Chá Rifa, Bento, Fraldas, Números da Sorte"
+    />
+    <meta name="author" content="Luciano Vital" />
+    <title>Chá Rifa do Bento</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <section id="inicio" class="convite">
+        <div class="background-image"></div>
+        <div class="content-center">
+          <h1 class="text-shadow">Chá Rifa</h1>
+          <h2 class="text-shadow">do</h2>
+          <h1 class="text-shadow">Bento</h1>
+          <p class="data text-shadow">Dia 10/04/2025 às 15h</p>
+          <div class="countdown">
+            <div class="countdown-item">
+              <span id="days">00</span>
+              <span>Dias</span>
+            </div>
+            <div class="countdown-item">
+              <span id="hours">00</span>
+              <span>Horas</span>
+            </div>
+            <div class="countdown-item">
+              <span id="minutes">00</span>
+              <span>Minutos</span>
+            </div>
+            <div class="countdown-item">
+              <span id="seconds">00</span>
+              <span>Segundos</span>
+            </div>
+          </div>
+          <div class="destaque">
+            <p>1º PRÊMIO: 100R$💰</p>
+            <p>2º PRÊMIO: OVO DE PÁSCOA TRUFADO 🐰</p>
+          </div>
+          <a href="#rifa" class="cta-button">Escolha seu número da sorte!</a>
+        </div>
+      </section>
+
+      <section id="rifa" class="rifa-section">
+        <div class="section-container">
+          <h2>Escolha seus números da sorte!</h2>
+          <p class="rifa-info">Cada número equivale a um pacote de fraldas</p>
+          <div class="fraldas-info">
+            <p>Números 01-20: Fraldas Tamanho P</p>
+            <p>Números 21-35: Fraldas Tamanho M</p>
+            <p>Números 36-50: Fraldas Tamanho G</p>
+          </div>
+          <div class="rifa-grid">
+            <!-- Os números serão gerados via JavaScript -->
+          </div>
+          <div class="selected-numbers">
+            <p>Números selecionados: <span id="selected"></span></p>
+          </div>
+          <button id="whatsapp-button" class="whatsapp-btn" disabled>
+            Confirmar números no WhatsApp
+          </button>
+          <a href="#inicio" class="back-to-top">↑</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Com amor, Papai e Mamãe <span class="emoji">🦁</span
+        ><span class="emoji">❤️</span>
+      </p>
+    </footer>
+    <script src="js/animations.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
