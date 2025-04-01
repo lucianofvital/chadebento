@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Números já escolhidos
   const unavailableNumbers = [
     1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 13, 17, 19, 20, 22, 23, 24, 25, 26, 27, 30,
-    31, 33, 40, 46,
+    31, 33, 40, 46, 28,
   ];
 
   // Criar os números da rifa
