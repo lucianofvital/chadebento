@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorteio do Chá de Bento</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/sorteio.css" />
+    <link rel="stylesheet" href="../css/animation.css" />
+    <link rel="stylesheet" href="../css/responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Comic+Neue&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section class="convite">
+      <div class="background-image"></div>
+      <div class="content-center">
+        <h1 class="text-shadow">Sorteio do Chá de Bento</h1>
+        <p class="data">Prepare-se! O sorteio acontece em:</p>
+
+        <div class="countdown">
+          <div class="countdown-item">
+            <span id="days">00</span>
+            <span>Dias</span>
+          </div>
+          <div class="countdown-item">
+            <span id="hours">00</span>
+            <span>Horas</span>
+          </div>
+          <div class="countdown-item">
+            <span id="minutes">00</span>
+            <span>Minutos</span>
+          </div>
+          <div class="countdown-item">
+            <span id="seconds">00</span>
+            <span>Segundos</span>
+          </div>
+        </div>
+
+        <div class="destaque">
+          <h2>Quem será o sortudo?</h2>
+          <p class="instrucao">
+            Assim que o tempo zerar o sorteio será liberado!
+          </p>
+
+          <div class="botoes-sorteio">
+            <div class="sorteio-item">
+              <button class="cta-button locked" id="sortear-premio-1" disabled>
+                SORTEAR 1º PRÊMIO 🎁
+              </button>
+              <div id="resultado-1" class="resultado"></div>
+            </div>
+
+            <div class="sorteio-item">
+              <button class="cta-button locked" id="sortear-premio-2" disabled>
+                SORTEAR 2º PRÊMIO 🎁
+              </button>
+              <div id="resultado-2" class="resultado"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Feito com carinho para o <span class="emoji">👶</span> Bento!</p>
+      <h6>Vital Web&Designer - 2025</h6>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="../js/countdown.js"></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

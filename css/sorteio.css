@@ -1,0 +1,60 @@
+/* ... existing code ... */
+
+.botoes-sorteio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.sorteio-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cta-button.locked {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  position: relative;
+  padding-right: 45px;
+}
+
+.cta-button.locked::after {
+  content: "🔒";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.resultado {
+  min-height: 40px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.instrucao {
+  color: #ff6b6b;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Quando o botão estiver ativo */
+.cta-button:not([disabled]) {
+  background-color: #ff6b6b;
+  cursor: pointer;
+}
+
+.cta-button:not([disabled]):hover {
+  background-color: #ff5252;
+  transform: scale(1.05);
+}
