@@ -40,24 +40,17 @@
         </div>
 
         <div class="destaque">
-          <h2>Quem será o sortudo?</h2>
-          <p class="instrucao">
-            Assim que o tempo zerar o sorteio será liberado!
-          </p>
-
-          <div class="botoes-sorteio">
-            <div class="sorteio-item">
-              <button class="cta-button locked" id="sortear-premio-1" disabled>
-                SORTEAR 1º PRÊMIO 🎁
-              </button>
-              <div id="resultado-1" class="resultado"></div>
+          <div id="sorteio1">
+            <button id="botao1" class="cta-button">Sortear 1º Prêmio</button>
+            <div id="resultado1" class="resultado">
+              <h3>Aguardando sorteio...</h3>
             </div>
+          </div>
 
-            <div class="sorteio-item">
-              <button class="cta-button locked" id="sortear-premio-2" disabled>
-                SORTEAR 2º PRÊMIO 🎁
-              </button>
-              <div id="resultado-2" class="resultado"></div>
+          <div id="sorteio2">
+            <button id="botao2" class="cta-button">Sortear 2º Prêmio</button>
+            <div id="resultado2" class="resultado">
+              <h3>Aguardando sorteio...</h3>
             </div>
           </div>
         </div>
@@ -72,5 +65,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="../js/countdown.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/testesorteio.js"></script>
   </body>
 </html>
