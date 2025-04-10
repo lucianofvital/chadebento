@@ -9,7 +9,7 @@ const participantes = [
   { numero: 9, nome: "Mirella" },
   { numero: 10, nome: "Paulinha" },
   { numero: 12, nome: "Pai Gilmar" },
-  { numero: 13, nome: "Diana" },
+  { numero: 13, nome: "Diana" }, // Primeiro ganhador fixo
   { numero: 17, nome: "Nilza" },
   { numero: 19, nome: "Rosangela Lucas" },
   { numero: 20, nome: "Miza" },
@@ -27,108 +27,59 @@ const participantes = [
   { numero: 46, nome: "Antônio Carlos" },
 ];
 
-// Recupera dados salvos ou inicializa arrays vazios
-let numerosSorteados =
-  JSON.parse(localStorage.getItem("numerosSorteados")) || [];
-let resultadosSorteio = JSON.parse(
-  localStorage.getItem("resultadosSorteio")
-) || {
-  premio1: null,
-  premio2: null,
-};
+// Inicialização das variáveis
+const numerosSorteados = [13]; // Número da Diana já fixo como primeiro ganhador
+const botaoSorteio2 = document.getElementById("botao2");
+const resultado2 = document.getElementById("resultado2");
 
-// Verifica se já passou da data do sorteio
+// Data do sorteio
+const DATA_SORTEIO = new Date("2025-04-10T15:00:00");
+
+// Verifica se já existe um ganhador do segundo prêmio
+let ganhador2 = JSON.parse(localStorage.getItem("ganhador2"));
+
+// Função para verificar se o horário do sorteio já chegou
 function verificarHorarioSorteio() {
-  const dataDoSorteio = new Date("2025-04-10T13:20:00");
-  const agora = new Date();
-  return agora >= dataDoSorteio;
+  return new Date() >= DATA_SORTEIO;
 }
 
-// Verifica e mostra resultados anteriores
-function verificarResultadosAnteriores() {
-  const botao1 = document.getElementById("botao1");
-  const botao2 = document.getElementById("botao2");
-  const resultado1 = document.getElementById("resultado1");
-  const resultado2 = document.getElementById("resultado2");
-
-  if (resultadosSorteio.premio1) {
-    botao1.style.display = "none";
-    mostrarResultadoSalvo(resultado1, resultadosSorteio.premio1);
-  }
-
-  if (resultadosSorteio.premio2) {
-    botao2.style.display = "none";
-    mostrarResultadoSalvo(resultado2, resultadosSorteio.premio2);
-  }
-
-  // Desabilita botões se não estiver na hora do sorteio
-  if (!verificarHorarioSorteio()) {
-    botao1.disabled = true;
-    botao2.disabled = true;
-    return false;
-  }
-}
-
-function mostrarResultadoSalvo(elemento, ganhador) {
-  elemento.classList.add("final");
-  elemento.textContent = `🏆 ${ganhador.numero} - ${ganhador.nome} 🏆`;
-}
-
-function iniciarSorteio(botaoId, resultadoId, premioNumero) {
-  if (!verificarHorarioSorteio()) {
-    alert("O sorteio ainda não foi liberado!");
-    return;
-  }
-
-  const botao = document.getElementById(botaoId);
-  const resultado = document.getElementById(resultadoId);
-
-  // Verifica se já foi sorteado
-  if (resultadosSorteio[`premio${premioNumero}`]) {
-    alert("Este prêmio já foi sorteado!");
-    return;
-  }
-
-  botao.style.display = "none";
-  resultado.classList.add("animando");
-
-  let velocidade = 100;
+// Função para animar o sorteio
+function animarSorteio() {
   let iteracoes = 0;
   const maxIteracoes = 30;
+  let intervalo = 100;
 
-  const roleta = setInterval(() => {
-    const indice = Math.floor(Math.random() * participantes.length);
-    const participante = participantes[indice];
-    resultado.textContent = `${participante.numero} - ${participante.nome}`;
+  const animacao = setInterval(() => {
+    const indiceAleatorio = Math.floor(Math.random() * participantes.length);
+    const participante = participantes[indiceAleatorio];
+
+    resultado2.innerHTML = `<h3>🎲 ${participante.numero} - ${participante.nome}</h3>`;
 
     iteracoes++;
-    velocidade += 10;
-
     if (iteracoes >= maxIteracoes) {
-      clearInterval(roleta);
-      finalizarSorteio(resultado, premioNumero);
+      clearInterval(animacao);
+      finalizarSorteio();
     }
-  }, velocidade);
+  }, intervalo);
 }
 
-function finalizarSorteio(resultado, premioNumero) {
+// Função para finalizar o sorteio
+function finalizarSorteio() {
   let ganhador;
   do {
-    const indice = Math.floor(Math.random() * participantes.length);
-    ganhador = participantes[indice];
+    const indiceAleatorio = Math.floor(Math.random() * participantes.length);
+    ganhador = participantes[indiceAleatorio];
   } while (numerosSorteados.includes(ganhador.numero));
 
-  numerosSorteados.push(ganhador.numero);
-  resultadosSorteio[`premio${premioNumero}`] = ganhador;
+  // Salva o ganhador no localStorage
+  localStorage.setItem("ganhador2", JSON.stringify(ganhador));
 
-  // Salva os resultados no localStorage
-  localStorage.setItem("numerosSorteados", JSON.stringify(numerosSorteados));
-  localStorage.setItem("resultadosSorteio", JSON.stringify(resultadosSorteio));
+  // Atualiza a interface
+  resultado2.innerHTML = `<h3>🎉 ${ganhador.numero} - ${ganhador.nome} 🎉</h3>`;
+  resultado2.classList.add("final");
+  botaoSorteio2.style.display = "none";
 
-  resultado.classList.remove("animando");
-  resultado.classList.add("final");
-  resultado.textContent = `🎉 ${ganhador.numero} - ${ganhador.nome} 🎉`;
-
+  // Dispara os confetes
   confetti({
     particleCount: 100,
     spread: 70,
@@ -137,14 +88,31 @@ function finalizarSorteio(resultado, premioNumero) {
   });
 }
 
+// Função para inicializar a página
+function inicializarPagina() {
+  if (!verificarHorarioSorteio()) {
+    botaoSorteio2.disabled = true;
+    botaoSorteio2.classList.add("locked");
+    return;
+  }
+
+  if (ganhador2) {
+    resultado2.innerHTML = `<h3>🎉 ${ganhador2.numero} - ${ganhador2.nome} 🎉</h3>`;
+    resultado2.classList.add("final");
+    botaoSorteio2.style.display = "none";
+  }
+}
+
 // Event Listeners
-document.getElementById("botao1").addEventListener("click", () => {
-  iniciarSorteio("botao1", "resultado1", 1);
+botaoSorteio2.addEventListener("click", () => {
+  if (!verificarHorarioSorteio()) {
+    alert("O sorteio ainda não está liberado!");
+    return;
+  }
+
+  botaoSorteio2.disabled = true;
+  animarSorteio();
 });
 
-document.getElementById("botao2").addEventListener("click", () => {
-  iniciarSorteio("botao2", "resultado2", 2);
-});
-
-// Verifica resultados anteriores quando a página carrega
-document.addEventListener("DOMContentLoaded", verificarResultadosAnteriores);
+// Inicializa a página quando carregar
+document.addEventListener("DOMContentLoaded", inicializarPagina);
